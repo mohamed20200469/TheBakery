@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bakery.Models\TheBakery.Models.csproj" />
+    <ProjectReference Include="..\TheBakery.Entities\TheBakery.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
