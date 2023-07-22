@@ -91,7 +91,7 @@ namespace TheBakery.Controllers
             {
                 return Ok(order);
             }
-            return NotFound(null);
+            return NotFound("No order with that ID exists in the database!");
         }
         [HttpPatch("FillOrder")]
         public ActionResult FillOrderById(int id)
@@ -104,7 +104,7 @@ namespace TheBakery.Controllers
                 _orderServices.UpdateDeliveryState(id, true);
                 return Ok("Order filled!");
             }
-            return BadRequest();
+            return BadRequest("Can't fill order, insufficient product in stock!");
         }
         [HttpDelete("DeleteOrder")]
         public ActionResult DeleteOrder(int id)
@@ -113,7 +113,7 @@ namespace TheBakery.Controllers
             {
                 return Ok("Order removed from database!");
             }
-            return BadRequest();
+            return NotFound("No order with that ID exists in the database!");
         }
     }
 }
