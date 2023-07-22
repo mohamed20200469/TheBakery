@@ -54,7 +54,7 @@ namespace TheBakery.DAL
         public bool DeleteProduct(int id)
         {
             ProductEntity product = _db.Products.Find(id);
-            if (product.id > 0)
+            if (product != null)
             {
                 _db.Products.Remove(product);
                 _db.SaveChanges();
@@ -66,7 +66,7 @@ namespace TheBakery.DAL
         public bool ChangePrice(int id, float price)
         {
             ProductEntity product = _db.Products.Find(id);
-            if (product != null && product.id > 0)
+            if (product != null && price > 0)
             {
                 product.price = price;
                 _db.SaveChanges();

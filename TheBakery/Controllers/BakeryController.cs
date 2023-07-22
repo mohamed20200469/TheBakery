@@ -21,7 +21,7 @@ namespace TheBakery.Controllers
             {
                 return Ok("Product added!");
             }
-            return BadRequest();
+            return BadRequest("Make sure that the price is >0");
         }
 
         [HttpGet("GetProductById")]
@@ -32,10 +32,10 @@ namespace TheBakery.Controllers
             {
                 return Ok(product);
             }
-            return NotFound();
+            return NotFound("No matching product found!");
         }
 
-        [HttpGet("GetProducts")]
+        [HttpGet("GetAllProducts")]
         public ActionResult<IEnumerable<ProductEntity>> Get()
         {
             return Ok(_productServices.GetProducts());
@@ -48,7 +48,7 @@ namespace TheBakery.Controllers
             {
                 return Ok("Product removed from database!");
             }
-            return NotFound();
+            return NotFound("No matching product found!");
         }
 
         [HttpPatch("ChangePrice")]
@@ -58,9 +58,9 @@ namespace TheBakery.Controllers
             {
                 return Ok("Product price changed!");
             }
-            return BadRequest();
+            return BadRequest("Check product ID and make sure that the price is >0");
         }
-        [HttpPatch("AddStock")]
+        [HttpPatch("UpdateStock")]
         public ActionResult Patch(int id, int stock)
         {
             if (_productServices.UpdateStock(id, stock))
@@ -76,7 +76,7 @@ namespace TheBakery.Controllers
             {
                 return Ok("Order created succesfully!");
             }
-            return BadRequest();
+            return BadRequest("Check the product ID and the amount!");
         }
         [HttpGet("GetAllOrders")]
         public IEnumerable<OrderEntity> GetAllOrders()
@@ -98,9 +98,9 @@ namespace TheBakery.Controllers
         {
             OrderEntity order = _orderServices.GetOrderById(id);
             ProductEntity product = _productServices.GetProductById(order.productId);
-            if (order.amount <= product.inStorage)
+            if (order.amount <= product.inStorage && order.delivered == false)
             {
-                _productServices.UpdateStock(id, (product.inStorage - order.amount));
+                _productServices.UpdateStock(product.id, (product.inStorage - order.amount));
                 _orderServices.UpdateDeliveryState(id, true);
                 return Ok("Order filled!");
             }
