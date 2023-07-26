@@ -11,8 +11,8 @@ namespace TheBakery.DAL
 {
     public class OrderDAL : IOrderDAL
     {
-        private readonly OrderDbContext _db;
-        public OrderDAL(OrderDbContext db)
+        private readonly AppDbContext _db;
+        public OrderDAL(AppDbContext db)
         {
             _db = db;
         }

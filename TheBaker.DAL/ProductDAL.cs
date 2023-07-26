@@ -7,8 +7,8 @@ namespace TheBakery.DAL
 {
     public class ProductDAL : IProductDAL
     {
-        private readonly ProductDbContext _db;
-        public ProductDAL(ProductDbContext db)
+        private readonly AppDbContext _db;
+        public ProductDAL(AppDbContext db)
         {
             _db = db;
         }

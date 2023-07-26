@@ -1,6 +1,7 @@
 using ITheBakery.Services;
 using Microsoft.AspNetCore.Mvc;
 using TheBakery.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheBakery.Controllers
 {
@@ -14,6 +15,7 @@ namespace TheBakery.Controllers
             _productServices = productServices;
             _orderServices = orderServices;
         }
+        [Authorize]
         [HttpPost("AddProduct")]
         public ActionResult<ProductEntity> Post(string name, float price, int stock)
         {
@@ -41,6 +43,7 @@ namespace TheBakery.Controllers
             return Ok(_productServices.GetProducts());
         }
 
+        [Authorize]
         [HttpDelete("DeleteProduct")]
         public ActionResult Delete(int id)
         {
@@ -60,6 +63,8 @@ namespace TheBakery.Controllers
             }
             return BadRequest("Check product ID and make sure that the price is >0");
         }
+
+        [Authorize]
         [HttpPatch("UpdateStock")]
         public ActionResult Patch(int id, int stock)
         {
@@ -69,6 +74,7 @@ namespace TheBakery.Controllers
             }
             return BadRequest();
         }
+
         [HttpPost("CreateOrder")]
         public ActionResult Post( string name,int productId,int amount)
         {
@@ -78,11 +84,15 @@ namespace TheBakery.Controllers
             }
             return BadRequest("Check the product ID and the amount!");
         }
+
+        [Authorize]
         [HttpGet("GetAllOrders")]
         public IEnumerable<OrderEntity> GetAllOrders()
         {
             return _orderServices.GetOrders();
         }
+
+        [Authorize]
         [HttpGet("GetOrderById")]
         public ActionResult<OrderEntity?> GetOrder(int id)
         {
@@ -93,6 +103,8 @@ namespace TheBakery.Controllers
             }
             return NotFound("No order with that ID exists in the database!");
         }
+
+        [Authorize]
         [HttpPatch("FillOrder")]
         public ActionResult FillOrderById(int id)
         {
@@ -106,6 +118,8 @@ namespace TheBakery.Controllers
             }
             return BadRequest("Can't fill order, insufficient product in stock!");
         }
+
+        [Authorize]
         [HttpDelete("DeleteOrder")]
         public ActionResult DeleteOrder(int id)
         {
