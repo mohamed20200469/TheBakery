@@ -1,6 +1,6 @@
 using ITheBakery.Services;
 using Microsoft.AspNetCore.Mvc;
-using TheBakery.Entities;
+using Data.SQL;
 using Microsoft.AspNetCore.Authorization;
 
 namespace TheBakery.Controllers

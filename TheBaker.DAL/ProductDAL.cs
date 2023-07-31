@@ -1,7 +1,6 @@
 ﻿using TheBakery.Models;
 using ITheBakery.DAL;
 using Data.SQL;
-using TheBakery.Entities;
 
 namespace TheBakery.DAL
 {

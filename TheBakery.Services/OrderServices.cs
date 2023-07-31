@@ -1,11 +1,11 @@
-﻿using ITheBakery.DAL;
+﻿using Data.SQL;
+using ITheBakery.DAL;
 using ITheBakery.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheBakery.Entities;
 
 namespace TheBakery.Services
 {

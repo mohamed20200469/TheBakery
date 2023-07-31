@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TheBakery.Services;
-using TheBakery.Entities;
 using Data.SQL;
 
 namespace VehicleQuotes.Controllers
@@ -47,7 +46,7 @@ namespace VehicleQuotes.Controllers
 
             return Ok(token);
         }
-        [HttpPost]
+        [HttpPost("Register User")]
         public async Task<ActionResult<UserEntity>> PostUser(UserEntity user)
         {
             if (!ModelState.IsValid)
